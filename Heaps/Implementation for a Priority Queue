@@ -1,0 +1,57 @@
+import java.util.PriorityQueue;
+import java.util.Comparator;
+
+public class PriorityQueueExample {
+    public static void main(String[] args) {
+        // Min-Heap Priority Queue
+        PriorityQueue<Task> minHeap = new PriorityQueue<>();
+
+        // Add tasks with priorities
+        minHeap.add(new Task(3, "Task 3"));
+        minHeap.add(new Task(1, "Task 1"));
+        minHeap.add(new Task(2, "Task 2"));
+
+        // Peek the highest priority task
+        System.out.println("Peek: " + minHeap.peek());
+
+        // Pop tasks based on priority
+        while (!minHeap.isEmpty()) {
+            System.out.println("Pop: " + minHeap.poll());
+        }
+
+        // Max-Heap Priority Queue
+        PriorityQueue<Task> maxHeap = new PriorityQueue<>(Comparator.reverseOrder());
+
+        // Add tasks with priorities
+        maxHeap.add(new Task(3, "Task 3"));
+        maxHeap.add(new Task(1, "Task 1"));
+        maxHeap.add(new Task(2, "Task 2"));
+
+        // Pop tasks based on priority
+        System.out.println("\nMax-Heap:");
+        while (!maxHeap.isEmpty()) {
+            System.out.println("Pop: " + maxHeap.poll());
+        }
+    }
+}
+
+// Task class implements Comparable for min-heap functionality
+class Task implements Comparable<Task> {
+    int priority;
+    String description;
+
+    public Task(int priority, String description) {
+        this.priority = priority;
+        this.description = description;
+    }
+
+    @Override
+    public int compareTo(Task other) {
+        return Integer.compare(this.priority, other.priority); // Min-Heap (lowest priority first)
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" + "priority=" + priority + ", description='" + description + '\'' + '}';
+    }
+}
